@@ -1,0 +1,27 @@
+version: '3'
+
+services: 
+  nginx:
+    container_name: my-nginx
+    image: nginx
+    ports:
+      - "80:80"
+    depends_on: 
+      - "service-one"
+      - "service-two"
+      - "service-three"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./access.log:/var/log/nginx/access.log
+  service-one:
+    build: ./service-one
+    image: service/one
+    container_name: service-one
+  service-two:
+    build: ./service-two
+    image: service/two
+    container_name: service-two
+  service-three:
+    build: ./service-three
+    image: service/three
+    container_name: service-three
